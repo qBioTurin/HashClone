@@ -1,0 +1,51 @@
+OPTION =  -O3 -Wall  -fmessage-length=0 -fopenmp  -std=c++11
+CC = gcc
+C++ = g++
+
+#HashChecker is the standard version. 
+#HashCheckerDebugOutput is the debug output version.
+#HashCheckerFreq computes and returns k-mer frequencies (leukemia).
+#HashCheckerSimilarRead improves the standard version in the output: the reads for which all k-mer are in the hash table are reported in output (.sim). 
+#HashCheckerSignature computes and returns the signatures of reads (leukemia). For each reads it computes the signatures as the largest sequence of consecutive k-mers found in the Hash Table
+
+all:	HashChecker HashCheckerDebugOutput HashCheckerFreq HashCheckerSimilarRead  HashCheckerSignature  CreateKmer TestFreq  FreqChecker Parser CompChecker FindRead
+
+clean:	
+	rm  HashChecker  HashCheckerDebugOutput HashCheckerFreq HashCheckerSimilarRead FreqChecker Parser TestFreq CreateKmer FindRead
+
+HashChecker:	main.cpp classIO.cpp general.cpp classIO.h const.h conf.h classHashChaining.h classHashChaining.cpp classMybitset.h classMybitset.cpp 
+	$(C++) -o  HashChecker classIO.cpp  main.cpp  general.cpp     $(OPTION)
+	
+HashCheckerDebugOutput:	main.cpp classIO.cpp general.cpp classIO.h const.h conf.h classHashChaining.h classHashChaining.cpp classMybitset.h classMybitset.cpp 
+	$(C++) -D DEBUGOUTPUT=1 -o  HashCheckerDebugOutput classIO.cpp  main.cpp  general.cpp     $(OPTION)
+	
+HashCheckerFreq:	main.cpp classIO.cpp general.cpp classIO.h const.h conf.h classHashChaining.h classHashChaining.cpp classMybitset.h classMybitset.cpp 
+	$(C++) -D DEBUGFREQ=2 -o  HashCheckerFreq classIO.cpp  main.cpp  general.cpp     $(OPTION)
+	
+HashCheckerSimilarRead:	main.cpp classIO.cpp general.cpp classIO.h const.h conf.h classHashChaining.h classHashChaining.cpp classMybitset.h classMybitset.cpp 
+	$(C++) -D SIMILARITY=1 -o  HashCheckerSimilarRead classIO.cpp  main.cpp  general.cpp     $(OPTION)	
+	
+HashCheckerSignature:	main.cpp classIO.cpp general.cpp classIO.h const.h conf.h classHashChaining.h classHashChaining.cpp classMybitset.h classMybitset.cpp 
+	$(C++) -D SIGNATURE=1 -o  HashCheckerSignature classIO.cpp  main.cpp  general.cpp     $(OPTION)	
+	
+	
+	
+FreqChecker:	mainfreq.cpp
+	$(C++) -o FreqChecker mainfreq.cpp   general.cpp  $(OPTION)
+	
+Parser:		mainparser.cpp	
+	$(C++) -o Parser mainparser.cpp    $(OPTION)
+	
+TestFreq:	test_frequency.cpp
+	 $(C++) -o TestFreq test_frequency.cpp   general.cpp  $(OPTION)	
+	
+CreateKmer:	mainKmer.cpp classIO.cpp general.cpp classIO.h const.h conf.h classHashChaining.h classHashChaining.cpp classMybitset.h classMybitset.cpp 
+	$(C++) -o CreateKmer  classIO.cpp  mainKmer.cpp  general.cpp     $(OPTION)
+        	
+CompChecker:	  CompareChecker.cpp general.cpp	general.h
+	$(C++) -o CompChecker  CompareChecker.cpp  general.cpp  $(OPTION)
+	
+FindRead:	  findRead.cpp general.cpp	general.h
+	$(C++) -o FindRead  findRead.cpp  general.cpp  $(OPTION)	
+doc:     
+	doxygen  DoxyFile
