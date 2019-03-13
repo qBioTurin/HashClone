@@ -109,6 +109,6 @@ where:
     
 To analyze PAT A by terminal assuming "~/output"" as the output folder path, and ~/input as the input folder path where PAT A data are copied:     
     
-   bash  HashClone.sh 26   10999997 10999997  1  ~/output  null  ~/input/A-S1.fastq  ~/input/AFU1.fastq ~/input/AFU2.fastq ~/input/AFU3.fastq 
+   bash  HashCloneParall.sh 26   10999997 10999997  1 IGH  ~/output  null null  ~/input/A-S1.fastq  ~/input/AFU1.fastq ~/input/AFU2.fastq ~/input/AFU3.fastq 
   
     
