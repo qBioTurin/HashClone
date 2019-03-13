@@ -79,7 +79,7 @@ Observe that HashCloneGUI requires   java  installed at system level.
 
 - To run HashClone without GUI you must type the following commands from a terminal:
 
-    bash HashClone.sh <k-mer>  <hash_size> <collision_list_size> <threshold> <output_folder> <mail> <input_file_1> ....<input_file_n>
+    bash HashCloneParall.sh <k-mer>  <hash_size> <collision_list_size> <threshold> <type of IG> <output_folder> <mail> <spike-in> <input_file_1> ....<input_file_n>
   
 
 where:
@@ -93,9 +93,13 @@ where:
 
     <threshold> this value is the  threshold used to select significant k-mers;
     
+    <type of IG>  Immunoglobulin Heavy Chain (IGH) or Immunoglobulin Light chain (IGK);
+    
     <output_folder> the folder where the output will be saved;
     
     <mail>  null or a valid mail address where to send information on  termination status of the run;
+    
+    <spike-in> the fasta file containing the list of the spike in sequences that you want to research in the samples
     
     <input_file_1> ....<input_file_n> the list of input patient files (one for each follow-up in fastq format)
 
